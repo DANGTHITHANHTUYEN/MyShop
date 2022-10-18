@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'ui/products/edit_product_screen.dart';
 import 'ui/cart/cart_manager.dart';
 import 'ui/cart/cart_screen.dart';
 import 'ui/orders/orders_manager.dart';
@@ -53,11 +54,24 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(
               builder: (ctx) {
                 return ProductDetailScreen(
-                  ProductsManager().findById(productId),
+                  ctx.read<ProductsManager>().findById(productId),
                 );
               },
             );
           }
+          if (settings.name == EditProductScreen.routeName) {
+            final productId = settings.arguments as String?;
+            return MaterialPageRoute(
+              builder: (ctx) {
+                return EditProductScreen(
+                  productId != null
+                      ? ctx.read<ProductsManager>().findById(productId)
+                      : null,
+                );
+              },
+            );
+          }
+
           return null;
         },
       ),

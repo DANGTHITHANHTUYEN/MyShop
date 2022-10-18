@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-Future<bool?> showConfirmDialog(BuildContext context, String message){
+
+Future<bool?> showConfirmDialog(BuildContext context, String message) {
   return showDialog(
     context: context,
     builder: (ctx) => AlertDialog(
@@ -7,18 +8,35 @@ Future<bool?> showConfirmDialog(BuildContext context, String message){
       actions: <Widget>[
         TextButton(
           child: const Text('No'),
-          onPressed: (){
+          onPressed: () {
             Navigator.of(ctx).pop(false);
           },
-          ),
-          TextButton(
-            child: const Text('Yes'),
-            onPressed: (){
-              Navigator.of(ctx).pop(true);
-            },
-          ),
+        ),
+        TextButton(
+          child: const Text('Yes'),
+          onPressed: () {
+            Navigator.of(ctx).pop(true);
+          },
+        ),
       ],
     ),
   );
-  
+}
+
+Future<bool?> showErrorDialog(BuildContext context, String message) {
+  return showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text('An Error Occurred!'),
+      content: Text(message),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('Okay'),
+          onPressed: () {
+            Navigator.of(ctx).pop();
+          },
+        ),
+      ],
+    ),
+  );
 }
